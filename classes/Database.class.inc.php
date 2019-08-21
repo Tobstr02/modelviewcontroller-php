@@ -2,25 +2,24 @@
 
 /**
  * Class database
- * Diese Klasse dient dazu, damit die Datenbankverbindung immer nur einmal hergestellt werden muss und über ein Objekt ansteuerbar ist.
+ * This class is for connecting with a database with PDO
  */
-class database
+class Database
 {
 
     /**
      * @var PDO
      */
-    private static $pdo = null;
+    private static $pdo;
 
     /**
-     * @param PDO $a_pdo Pdo Instanz
+     * @param PDO $a_pdo PDO instance
      *
      * @return void
      */
     public static function setConnection( PDO $a_pdo )
     {
         self::$pdo = $a_pdo;
-        return void;
 
     } # function setConnection(...)
 

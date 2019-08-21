@@ -6,17 +6,21 @@
 class DefaultController
 {
     /**
-     * indexAction
+     * The default index test controller
      *
-     * @return string
-     * @throws Exception    Wirft Fehler
+     * @return string   HTML Code
+     * @throws Exception
      */
     public function indexAction()
     {
         $view = new Template( 'test' );
-        $view->set_placeholder( 'test', 'foobar' );
 
-        // Gibt die Seite als String für die index.php zurück
+        $DefaultModel = new DefaultModel();
+        $value = $DefaultModel->getTestMessage();
+
+        $view->set_placeholder( 'test', $value );
+
+        // Return the HTML Code to the index.php
 	    return $view->getHtml();
 
     } # function indexAction()

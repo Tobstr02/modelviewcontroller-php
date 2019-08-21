@@ -1,8 +1,7 @@
 <?php
-// Konfigurationsdatei
+// Configuration file
 
-# MySQL-Login Daten
-# TODO Datenbankverbindung erstezen
+# MySQL-Login data
 define( 'MYSQL_HOST', 'localhost' );
 define( 'MYSQL_USER', '' );
 define( 'MYSQL_PASS', '' );

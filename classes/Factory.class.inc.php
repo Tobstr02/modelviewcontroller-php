@@ -2,39 +2,38 @@
 
 /**
  * Class Factory
- * Diese Klasse holt sich den Kontroller und die Aktion
- * Der User sendet die Aufforderung, die Factory Klasse kümmert sich um die Ausführung
+ * This class returns the action and controller for index file
  */
-class factory
+class Factory
 {
     /**
-     * Gibt den Controller zurück
+     * Returns the right controller
      *
-     * @param request $a_request    Request
+     * @param Request $a_request    Request
      *
      * @return mixed
      */
-    public static function getController( request $a_request )
+    public static function getController( Request $a_request )
     {
-        # Name des Controllers
+        # Prepare name of controller
 	    $controller_name = mb_strtolower( $a_request->getVar( 'controller' ) );
         $controller_name = ucfirst( $controller_name );
-        $controller_name .= "Controller";
+        $controller_name .= 'Controller';
 
-        if ( $controller_name == "Controller" )
+        if ( $controller_name === 'Controller')
         {
-            $controller = new StartController();
+            $controller = new DefaultController();
 
             return $controller;
         }
 
-        # Controller existiert nicht
+        # if controller doesn't exist
         if ( !file_exists( __DIR__ . '/../controller/' . $controller_name . '.class.inc.php' ) )
         {
             return new DefaultController();
         }
 
-        # Controller initialisieren
+        # Call controller and returns it
         $controller = new $controller_name();
 
         return $controller;
@@ -42,19 +41,19 @@ class factory
     } # function getController(...)
 
     /**
-     * Gibt die Action zurück, auf der gearbeitet werden soll
-     * @param DefaultController $a_controller   Ist der Default Controller
-     * @param Request $a_request    Die Anfrage
+     * Returns the right action
+     * @param $a_controller
+     * @param Request $a_request    Request
      * @return string
      */
-    public static function getAction( DefaultController $a_controller, Request $a_request )
+    public static function getAction( $a_controller, Request $a_request )
     {
-        # Name der Action
-        $action_name = mb_strtolower( $a_request->getVar( "action" ) );
+        # Prepare name of the action
+        $action_name = mb_strtolower( $a_request->getVar('action') );
         $action_name = str_ireplace( 'action', '', $action_name );
         $action_name .= 'Action';
 
-        # Action nicht da
+        # Action not found
         if ( !method_exists( $a_controller, $action_name ) )
         {
             return 'indexAction';

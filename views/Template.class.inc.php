@@ -1,34 +1,25 @@
 <?php
 
 /**
- * Template Klasse
- * Templates werden unter "templates" erstellt.
- * Ein Template Platzhalter wird mit [[NAME]] erstellt.
+ * Template Class
+ * Templates are stored under templates/
+ * A placeholder is created with [[NAME OF PLACEHOLDER]]
  */
 class Template
 {
     /**
-     * Variablen als Privat definieren
+     * Variables for Template Class
      */
     /**
-     * @var string     Variable für Template
+     * @var string  To store informations while class is defined
      */
-    private $template = '';
-
-    /**
-     * Konstruktor
-     *
-     * @param $a_file_name
-     *
-     * @throws Exception
-     */
-    #Dateiinhalte speichern
+    private $template;
 
     /**
      * Template constructor
      * .
-     * @param string $a_file_name  Dateiname
-     * @throws Exception    Wirft Exception
+     * @param string $a_file_name  Template file name(without .tmpl.html)
+     * @throws Exception    Template not found Exception
      */
     public function __construct( $a_file_name )
     {
@@ -41,15 +32,14 @@ class Template
         }
 
         $this->template = file_get_contents( $path );
-        return void;
 
     } # function __construct(...)
 
     /**
-     * Speichert sich die Platzhalter und ersetzt diese z.B. [[TABLE]] zu "<table>..."
+     * Replaces a placeholder with a string
      *
-     * @param string $a_key Der Key zum Suchen
-     * @param string $a_value   Gegen was es ersetzt werden soll
+     * @param string $a_key Key of the placeholder
+     * @param string $a_value   Replace this with the key
      *
      * @throws Exception    Wirft Exception
      * @return void
@@ -59,36 +49,34 @@ class Template
     {
         if ( empty( $a_value ) )
         {
-            $a_value = "E006#TMPL";
+            $a_value = '-';
         }
         $a_key = mb_strtoupper( $a_key );
         $key = '[[' . $a_key . ']]';
-        # Hier in $this->template ersetzen
+
         $this->template = str_replace( $key, $a_value, $this->template );
-        return void;
 
     } # function set_placeholder(...)
 
     /**
-     * Entfernt alle unbenutzen Platzhalter
+     * Removes all unused placeholders
      *
      * @return void
      */
     private function removePlaceholder()
     {
-        $this->template = preg_replace( '/\[\[.*\]\]/', '', $this->template );
-        return void;
+        $this->template = preg_replace( '/\[\[.*]]/', '', $this->template );
 
     }  # function removePlaceholder()
 
     /**
-     * Gibt das Template als HTML-Format zurück
+     * Return the template as string
      *
      * @return string
      */
     public function getHtml()
     {
-        # Entfernt die nicht ersetzten Platzhalter
+        # Remove all unreplaced placeholders
         $this->removePlaceholder();
 
         return $this->template;

@@ -1,20 +1,21 @@
 <?php
 /**
  * Class Autoloader
- * Lädt die Klassen automatisch, solange sie in den vorhandenen Ordnern sind
+ * Loads a class on call
  */
-class autoloader
+class Autoloader
 {
 
-    /*
-     * Alle Verzeichnisse in denen Klassen automatisch geladen werden sollen
-     * @var static
-     */
-    # todo Hier Verzeichnisse einfügen, falls benötigt
+    /**
+     * All directorys to search for classes
+     * You can add directorys if you want
+     * @var static $directorys
+     *
+     **/
     private static $directorys = array('classes', 'controller', 'model', 'views');
 
     /**
-     * Autoloader constructor.
+     * Load's the autoloader
 	 * 
      * @return void
      */
@@ -22,26 +23,25 @@ class autoloader
 	{
 		if ( !spl_autoload_register( array( $this, 'load_class' ) ) )
 		{
-			die("A fatal error has occurred.");
+			die('A fatal error has occurred.');
 		}
 
 	} # function __construct()
 
     /**
-     * Registriert den Autoloader
+     * register the autoloader
      *
      * @return void
      */
 	public static function register()
 	{
 		new Autoloader();
-		return void;
 
 	} # function register()
 
 
     /**
-     * Lädt die Klasse
+     * Loads a class
      *
      * @param string $a_class_name    Klassen-Name
      * @return void
@@ -51,7 +51,7 @@ class autoloader
 	{
 		foreach ( self::$directorys as $folder )
 		{
-			$file = __DIR__ . "/../" . $folder . '/' . $a_class_name . '.class.inc.php';
+			$file = __DIR__ . '/../' . $folder . '/' . $a_class_name . '.class.inc.php';
 
 			if ( file_exists( $file ) )
 			{
@@ -66,7 +66,6 @@ class autoloader
 				}
 			}
 		}
-		return void;
 
 	} # function load_class(...)
 } # class
