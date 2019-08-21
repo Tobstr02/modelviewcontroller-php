@@ -30,11 +30,11 @@ class Request
      */
     public function getVar( $a_name, $a_default = null, $a_request = 'GET' )
     {
-        if ( $a_request == self::$GET )
+        if ( $a_request === self::$GET )
         {
             $requestArray = $_GET;
         }
-        else if ( $a_request == self::$POST )
+        else if ( $a_request === self::$POST )
         {
             $requestArray = $_POST;
         }

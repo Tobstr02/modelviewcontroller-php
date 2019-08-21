@@ -55,14 +55,14 @@ class Autoloader
 
 			if ( file_exists( $file ) )
 			{
-				require_once( $file );
+				require_once $file;
 			}
 			else
 			{
 				$file = __DIR__ . '/../' . $folder . '/' . mb_strtolower( $a_class_name ) . '.class.inc.php';
 				if ( file_exists( $file ) )
                 {
-                   	require_once( $file );
+                   	require_once $file;
 				}
 			}
 		}

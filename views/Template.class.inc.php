@@ -28,7 +28,7 @@ class Template
         # Template existiert nicht
         if ( !file_exists( $path ) )
         {
-            throw new Exception( "Template '$a_file_name' existiert nicht!", 2 );
+            throw new RuntimeException( "Template '$a_file_name' doesn't exist!", 2 );
         }
 
         $this->template = file_get_contents( $path );
