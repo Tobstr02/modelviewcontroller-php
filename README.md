@@ -63,7 +63,7 @@ The following PHP versions have been tested and run without problems under the v
 - 7.3
 
 ## Documentation
-To view some documentation about this PHP-MVC, visit the [Wiki](https://https://github.com/Tobstr02/modelviewcontroller-php/wiki) page of this repository.
+To view some documentation about this PHP-MVC, visit the [Wiki](https://github.com/Tobstr02/modelviewcontroller-php/wiki) page of this repository.
 
 
 ## License
